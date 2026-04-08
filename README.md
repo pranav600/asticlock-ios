@@ -1,50 +1,33 @@
-# Welcome to your Expo app 👋
+# AstiClock (React Native Flip Clock)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A full-screen, minimalist, 3D animated flip clock UI built with React Native and Expo.
 
-## Get started
+## Features
+- **Authentic Flip Mechanics**: Uses `react-native-reanimated` for smooth 60fps 3D flip card animations mimicking a physical mechanical clock.
+- **Responsive Layout**: Adjusts styling for row (landscape/tablet) and column (portrait) orientations seamlessly without skewing proportions.
+- **Adaptive Precision**: Displays hours, minutes, and seconds, updating crisply on the exact 1000ms boundary.
+
+## Stack
+- React Native (version 0.81.5)
+- Expo Router (version 6.x)
+- React Native Reanimated (for flip animations)
+
+## Getting Started
 
 1. Install dependencies
-
    ```bash
    npm install
    ```
 
-2. Start the app
-
+2. Start the development server
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+   You can then press `w` to open it in a web browser instantly, or scan the QR code using the Expo Go app on iOS or Android.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Architecture
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+The flip cards are composed using a layering technique:
+- A static background half (`currentValue` bottom, `nextValue` top)
+- Two absolute positioned `Animated.View` flaps that rotate around their center (the seam of the card) spanning respectively `[0 -> -90deg]` and `[90 -> 0deg]` over a 400ms duration.
